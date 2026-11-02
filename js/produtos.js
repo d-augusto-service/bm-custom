@@ -16,172 +16,184 @@ window.PRODUTOS = [
   "novo": 1,
   "variantes": [
    {
-    "id": 41,
+    "id": 90,
     "tamanho": "S",
     "cor": "Preto",
-    "stock": 5
+    "stock": 0
    },
    {
-    "id": 42,
+    "id": 89,
     "tamanho": "S",
     "cor": "Branco",
-    "stock": 4
+    "stock": 0
    },
    {
-    "id": 43,
+    "id": 88,
     "tamanho": "S",
     "cor": "Azul-escuro",
-    "stock": 5
+    "stock": 0
    },
    {
-    "id": 44,
+    "id": 87,
     "tamanho": "S",
     "cor": "Bege",
-    "stock": 5
+    "stock": 0
    },
    {
-    "id": 45,
+    "id": 86,
     "tamanho": "S",
-    "cor": "Rosa",
-    "stock": 5
+    "cor": "Rosa bebé",
+    "stock": 0
    },
    {
-    "id": 46,
+    "id": 85,
     "tamanho": "M",
     "cor": "Preto",
-    "stock": 5
+    "stock": 0
    },
    {
-    "id": 47,
+    "id": 84,
     "tamanho": "M",
     "cor": "Branco",
-    "stock": 5
+    "stock": 3
    },
    {
-    "id": 48,
+    "id": 83,
     "tamanho": "M",
+    "cor": "Azul-escuro",
+    "stock": 0
+   },
+   {
+    "id": 82,
+    "tamanho": "M",
+    "cor": "Bege",
+    "stock": 0
+   },
+   {
+    "id": 81,
+    "tamanho": "M",
+    "cor": "Rosa bebé",
+    "stock": 1
+   },
+   {
+    "id": 80,
+    "tamanho": "L",
+    "cor": "Preto",
+    "stock": 0
+   },
+   {
+    "id": 79,
+    "tamanho": "L",
+    "cor": "Branco",
+    "stock": 2
+   },
+   {
+    "id": 78,
+    "tamanho": "L",
     "cor": "Azul-escuro",
     "stock": 2
    },
    {
-    "id": 49,
-    "tamanho": "M",
-    "cor": "Bege",
-    "stock": 5
-   },
-   {
-    "id": 50,
-    "tamanho": "M",
-    "cor": "Rosa",
-    "stock": 5
-   },
-   {
-    "id": 51,
-    "tamanho": "L",
-    "cor": "Preto",
-    "stock": 5
-   },
-   {
-    "id": 52,
-    "tamanho": "L",
-    "cor": "Branco",
-    "stock": 5
-   },
-   {
-    "id": 53,
-    "tamanho": "L",
-    "cor": "Azul-escuro",
-    "stock": 5
-   },
-   {
-    "id": 54,
+    "id": 77,
     "tamanho": "L",
     "cor": "Bege",
-    "stock": 5
+    "stock": 1
    },
    {
-    "id": 55,
+    "id": 76,
     "tamanho": "L",
-    "cor": "Rosa",
-    "stock": 5
+    "cor": "Rosa bebé",
+    "stock": 0
    },
    {
-    "id": 56,
+    "id": 75,
     "tamanho": "XL",
     "cor": "Preto",
-    "stock": 5
+    "stock": 1
    },
    {
-    "id": 57,
+    "id": 74,
     "tamanho": "XL",
     "cor": "Branco",
-    "stock": 5
+    "stock": 2
    },
    {
-    "id": 58,
+    "id": 73,
     "tamanho": "XL",
     "cor": "Azul-escuro",
-    "stock": 5
+    "stock": 1
    },
    {
-    "id": 59,
+    "id": 72,
     "tamanho": "XL",
     "cor": "Bege",
-    "stock": 5
+    "stock": 0
    },
    {
-    "id": 60,
+    "id": 71,
     "tamanho": "XL",
-    "cor": "Rosa",
-    "stock": 5
+    "cor": "Rosa bebé",
+    "stock": 0
    },
    {
-    "id": 61,
+    "id": 70,
     "tamanho": "XL",
     "cor": "Cor de leite",
-    "stock": 5
+    "stock": 0
    },
    {
-    "id": 62,
+    "id": 69,
     "tamanho": "L",
     "cor": "Cor de leite",
-    "stock": 5
-   },
-   {
-    "id": 63,
-    "tamanho": "M",
-    "cor": "Cor de leite",
-    "stock": 5
-   },
-   {
-    "id": 64,
-    "tamanho": "S",
-    "cor": "Cor de leite",
-    "stock": 5
-   },
-   {
-    "id": 65,
-    "tamanho": "XL",
-    "cor": "Vinho",
-    "stock": 5
-   },
-   {
-    "id": 66,
-    "tamanho": "L",
-    "cor": "Vinho",
-    "stock": 5
-   },
-   {
-    "id": 67,
-    "tamanho": "M",
-    "cor": "Vinho",
-    "stock": 5
+    "stock": 0
    },
    {
     "id": 68,
+    "tamanho": "M",
+    "cor": "Cor de leite",
+    "stock": 0
+   },
+   {
+    "id": 67,
+    "tamanho": "S",
+    "cor": "Cor de leite",
+    "stock": 0
+   },
+   {
+    "id": 66,
+    "tamanho": "XL",
+    "cor": "Vinho",
+    "stock": 0
+   },
+   {
+    "id": 65,
+    "tamanho": "L",
+    "cor": "Vinho",
+    "stock": 0
+   },
+   {
+    "id": 64,
+    "tamanho": "M",
+    "cor": "Vinho",
+    "stock": 4
+   },
+   {
+    "id": 63,
     "tamanho": "S",
     "cor": "Vinho",
-    "stock": 5
+    "stock": 0
+   },
+   {
+    "id": 62,
+    "tamanho": "M",
+    "cor": "Camarão",
+    "stock": 2
+   },
+    {
+    "id": 61,
+    "tamanho": "M",
+    "cor": "Lilás",
+    "stock": 2
    },
   ]
  },
@@ -201,125 +213,185 @@ window.PRODUTOS = [
   "novo": 1,
   "variantes": [
    {
-    "id": 21,
+    "id": 60,
     "tamanho": "S",
     "cor": "Preto",
-    "stock": 5
+    "stock": 0
    },
    {
-    "id": 22,
+    "id": 59,
     "tamanho": "S",
     "cor": "Branco",
-    "stock": 5
+    "stock": 0
    },
    {
-    "id": 23,
+    "id": 58,
     "tamanho": "S",
     "cor": "Azul-escuro",
-    "stock": 5
+    "stock": 0
    },
    {
-    "id": 24,
+    "id": 57,
     "tamanho": "S",
     "cor": "Bege",
-    "stock": 5
+    "stock": 0
    },
    {
-    "id": 25,
+    "id": 56,
     "tamanho": "S",
-    "cor": "Rosa",
-    "stock": 5
+    "cor": "Rosa bebé",
+    "stock": 0
    },
    {
-    "id": 26,
+    "id": 55,
     "tamanho": "M",
     "cor": "Preto",
-    "stock": 5
+    "stock": 0
    },
    {
-    "id": 27,
+    "id": 54,
     "tamanho": "M",
     "cor": "Branco",
-    "stock": 5
+    "stock": 3
    },
    {
-    "id": 28,
+    "id": 53,
     "tamanho": "M",
     "cor": "Azul-escuro",
-    "stock": 5
+    "stock": 0
    },
    {
-    "id": 29,
+    "id": 52,
     "tamanho": "M",
     "cor": "Bege",
-    "stock": 5
+    "stock": 0
    },
    {
-    "id": 30,
+    "id": 51,
     "tamanho": "M",
-    "cor": "Rosa",
-    "stock": 5
+    "cor": "Rosa bebé",
+    "stock": 1
    },
    {
-    "id": 31,
+    "id": 50,
     "tamanho": "L",
     "cor": "Preto",
-    "stock": 5
+    "stock": 0
    },
    {
-    "id": 32,
+    "id": 49,
     "tamanho": "L",
     "cor": "Branco",
-    "stock": 5
+    "stock": 2
    },
    {
-    "id": 33,
+    "id": 48,
     "tamanho": "L",
     "cor": "Azul-escuro",
-    "stock": 5
+    "stock": 2
    },
    {
-    "id": 34,
+    "id": 47,
     "tamanho": "L",
     "cor": "Bege",
-    "stock": 5
+    "stock": 1
    },
    {
-    "id": 35,
+    "id": 46,
     "tamanho": "L",
-    "cor": "Rosa",
-    "stock": 5
+    "cor": "Rosa bebé",
+    "stock": 0
    },
    {
-    "id": 36,
+    "id": 45,
     "tamanho": "XL",
     "cor": "Preto",
-    "stock": 5
+    "stock": 1
    },
    {
-    "id": 37,
+    "id": 44,
     "tamanho": "XL",
     "cor": "Branco",
-    "stock": 5
+    "stock": 2
    },
    {
-    "id": 38,
+    "id": 43,
     "tamanho": "XL",
     "cor": "Azul-escuro",
-    "stock": 5
+    "stock": 1
    },
    {
-    "id": 39,
+    "id": 42,
     "tamanho": "XL",
     "cor": "Bege",
-    "stock": 5
+    "stock": 0
+   },
+   {
+    "id": 41,
+    "tamanho": "XL",
+    "cor": "Rosa bebé",
+    "stock": 0
    },
    {
     "id": 40,
     "tamanho": "XL",
-    "cor": "Rosa",
-    "stock": 5
-   }
+    "cor": "Cor de leite",
+    "stock": 0
+   },
+   {
+    "id": 39,
+    "tamanho": "L",
+    "cor": "Cor de leite",
+    "stock": 0
+   },
+   {
+    "id": 38,
+    "tamanho": "M",
+    "cor": "Cor de leite",
+    "stock": 0
+   },
+   {
+    "id": 37,
+    "tamanho": "S",
+    "cor": "Cor de leite",
+    "stock": 0
+   },
+   {
+    "id": 36,
+    "tamanho": "XL",
+    "cor": "Vinho",
+    "stock": 0
+   },
+   {
+    "id": 35,
+    "tamanho": "L",
+    "cor": "Vinho",
+    "stock": 0
+   },
+   {
+    "id": 34,
+    "tamanho": "M",
+    "cor": "Vinho",
+    "stock": 4
+   },
+   {
+    "id": 33,
+    "tamanho": "S",
+    "cor": "Vinho",
+    "stock": 0
+   },
+   {
+    "id": 32,
+    "tamanho": "M",
+    "cor": "Camarão",
+    "stock": 2
+   },
+    {
+    "id": 31,
+    "tamanho": "M",
+    "cor": "Lilás",
+    "stock": 2
+   },
   ]
  },
  {
@@ -328,7 +400,7 @@ window.PRODUTOS = [
   "nome": "T-shirts da própria marca.",
   "categoria": "personalizadas",
   "descricao": "Personalize a tua própria t-shirt.",
-  "preco": 6000,
+  "preco": 8000,
   "preco_promo": null,
   "imagens": [
    "assets/images/produtos/t-shirts-da-propria-marca.jpg"
@@ -337,126 +409,187 @@ window.PRODUTOS = [
   "destaque": 1,
   "novo": 1,
   "variantes": [
-   {
-    "id": 1,
+  {
+    "id": 30,
     "tamanho": "S",
     "cor": "Preto",
-    "stock": 5
+    "stock": 0
    },
    {
-    "id": 2,
+    "id": 29,
     "tamanho": "S",
     "cor": "Branco",
-    "stock": 5
+    "stock": 0
    },
    {
-    "id": 3,
+    "id": 28,
     "tamanho": "S",
     "cor": "Azul-escuro",
-    "stock": 5
+    "stock": 0
    },
    {
-    "id": 4,
+    "id": 27,
     "tamanho": "S",
     "cor": "Bege",
-    "stock": 5
+    "stock": 0
    },
    {
-    "id": 5,
+    "id": 26,
     "tamanho": "S",
-    "cor": "Rosa",
-    "stock": 5
+    "cor": "Rosa bebé",
+    "stock": 0
    },
    {
-    "id": 6,
+    "id": 25,
     "tamanho": "M",
     "cor": "Preto",
-    "stock": 5
+    "stock": 0
    },
    {
-    "id": 7,
+    "id": 24,
     "tamanho": "M",
     "cor": "Branco",
-    "stock": 5
+    "stock": 3
+   },
+   {
+    "id": 23,
+    "tamanho": "M",
+    "cor": "Azul-escuro",
+    "stock": 0
+   },
+   {
+    "id": 22,
+    "tamanho": "M",
+    "cor": "Bege",
+    "stock": 0
+   },
+   {
+    "id": 21,
+    "tamanho": "M",
+    "cor": "Rosa bebé",
+    "stock": 1
+   },
+   {
+    "id": 20,
+    "tamanho": "L",
+    "cor": "Preto",
+    "stock": 0
+   },
+   {
+    "id": 19,
+    "tamanho": "L",
+    "cor": "Branco",
+    "stock": 2
+   },
+   {
+    "id": 18,
+    "tamanho": "L",
+    "cor": "Azul-escuro",
+    "stock": 2
+   },
+   {
+    "id": 17,
+    "tamanho": "L",
+    "cor": "Bege",
+    "stock": 1
+   },
+   {
+    "id": 16,
+    "tamanho": "L",
+    "cor": "Rosa bebé",
+    "stock": 0
+   },
+   {
+    "id": 15,
+    "tamanho": "XL",
+    "cor": "Preto",
+    "stock": 1
+   },
+   {
+    "id": 14,
+    "tamanho": "XL",
+    "cor": "Branco",
+    "stock": 2
+   },
+   {
+    "id": 13,
+    "tamanho": "XL",
+    "cor": "Azul-escuro",
+    "stock": 1
+   },
+   {
+    "id": 12,
+    "tamanho": "XL",
+    "cor": "Bege",
+    "stock": 0
+   },
+   {
+    "id": 11,
+    "tamanho": "XL",
+    "cor": "Rosa bebé",
+    "stock": 0
+   },
+   {
+    "id": 10,
+    "tamanho": "XL",
+    "cor": "Cor de leite",
+    "stock": 0
+   },
+   {
+    "id": 9,
+    "tamanho": "L",
+    "cor": "Cor de leite",
+    "stock": 0
    },
    {
     "id": 8,
     "tamanho": "M",
-    "cor": "Azul-escuro",
-    "stock": 5
+    "cor": "Cor de leite",
+    "stock": 0
    },
    {
-    "id": 9,
+    "id": 7,
+    "tamanho": "S",
+    "cor": "Cor de leite",
+    "stock": 0
+   },
+   {
+    "id": 6,
+    "tamanho": "XL",
+    "cor": "Vinho",
+    "stock": 0
+   },
+   {
+    "id": 5,
+    "tamanho": "L",
+    "cor": "Vinho",
+    "stock": 0
+   },
+   {
+    "id": 4,
     "tamanho": "M",
-    "cor": "Bege",
-    "stock": 5
+    "cor": "Vinho",
+    "stock": 4
    },
    {
-    "id": 10,
+    "id": 3,
+    "tamanho": "S",
+    "cor": "Vinho",
+    "stock": 0
+   },
+   {
+    "id": 2,
     "tamanho": "M",
-    "cor": "Rosa",
-    "stock": 5
+    "cor": "Camarão",
+    "stock": 2
    },
-   {
-    "id": 11,
-    "tamanho": "L",
-    "cor": "Preto",
-    "stock": 5
+    {
+    "id": 1,
+    "tamanho": "M",
+    "cor": "Lilás",
+    "stock": 2
    },
-   {
-    "id": 12,
-    "tamanho": "L",
-    "cor": "Branco",
-    "stock": 5
-   },
-   {
-    "id": 13,
-    "tamanho": "L",
-    "cor": "Azul-escuro",
-    "stock": 5
-   },
-   {
-    "id": 14,
-    "tamanho": "L",
-    "cor": "Bege",
-    "stock": 5
-   },
-   {
-    "id": 15,
-    "tamanho": "L",
-    "cor": "Rosa",
-    "stock": 5
-   },
-   {
-    "id": 16,
-    "tamanho": "XL",
-    "cor": "Preto",
-    "stock": 5
-   },
-   {
-    "id": 17,
-    "tamanho": "XL",
-    "cor": "Branco",
-    "stock": 5
-   },
-   {
-    "id": 18,
-    "tamanho": "XL",
-    "cor": "Azul-escuro",
-    "stock": 5
-   },
-   {
-    "id": 19,
-    "tamanho": "XL",
-    "cor": "Bege",
-    "stock": 5
-   },
-   {
-    "id": 20,
-    "tamanho": "XL",
-    "cor": "Rosa",
-    "stock": 5
-   }
   ]
  }
 ];
+
