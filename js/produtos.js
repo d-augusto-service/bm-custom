@@ -134,7 +134,55 @@ window.PRODUTOS = [
     "tamanho": "XL",
     "cor": "Rosa",
     "stock": 5
-   }
+   },
+   {
+    "id": 61,
+    "tamanho": "XL",
+    "cor": "Cor de leite",
+    "stock": 5
+   },
+   {
+    "id": 62,
+    "tamanho": "L",
+    "cor": "Cor de leite",
+    "stock": 5
+   },
+   {
+    "id": 63,
+    "tamanho": "M",
+    "cor": "Cor de leite",
+    "stock": 5
+   },
+   {
+    "id": 64,
+    "tamanho": "S",
+    "cor": "Cor de leite",
+    "stock": 5
+   },
+   {
+    "id": 65,
+    "tamanho": "XL",
+    "cor": "Vinho",
+    "stock": 5
+   },
+   {
+    "id": 66,
+    "tamanho": "L",
+    "cor": "Vinho",
+    "stock": 5
+   },
+   {
+    "id": 67,
+    "tamanho": "M",
+    "cor": "Vinho",
+    "stock": 5
+   },
+   {
+    "id": 68,
+    "tamanho": "S",
+    "cor": "Vinho",
+    "stock": 5
+   },
   ]
  },
  {
