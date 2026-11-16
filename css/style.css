@@ -49,3 +49,6 @@ form{display:grid;gap:.9rem}footer{border-top:1px solid var(--l);padding-top:2.5
 .alt-wa{font-size:.9rem}.alt-wa summary{cursor:pointer;font-weight:600}
 .ad .ped{border-left:4px solid var(--a)}.ad .bar{display:flex;flex-wrap:wrap;gap:.6rem;align-items:center;margin-bottom:1rem}.ad .bar input{flex:1 1 220px;width:auto}.ad .lin .btn{min-height:40px;padding:.4rem 1.1rem}.ad .st{font-weight:700}
 .logo img,.fg img{mix-blend-mode:multiply} /* o JPG do logótipo tem fundo branco: assim funde-se com o creme sem alterar o ficheiro */
+/* «Ver mais modelos» */
+html{scroll-behavior:smooth}@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+#mais-modelos{scroll-margin-top:84px}

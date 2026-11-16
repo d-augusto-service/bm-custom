@@ -3,7 +3,9 @@
 const $=(s,e=document)=>e.querySelector(s),$$=(s,e=document)=>[...e.querySelectorAll(s)];
 const E=(t,p={},k=[])=>{const{aria,...r}=p,e=Object.assign(document.createElement(t),r);if(aria)e.setAttribute('aria-label',aria);e.append(...k);return e};
 const kz=n=>String(n).replace(/\B(?=(\d{3})+(?!\d))/g,'.')+' Kz';
-const DAT=window.DADOS,PR=window.PRODUTOS.filter(p=>p.publicado).map(p=>({...p,preco_final:p.preco_promo??p.preco}));
+let DAT=window.DADOS,PR=window.PRODUTOS.filter(p=>p.publicado).map(p=>({...p,preco_final:p.preco_promo??p.preco})); // ficheiros = cópia de segurança
+const esc=t=>String(t??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const okLink=l=>/^(https:\/\/|[a-z0-9_.\/?=&#-]+$)/i.test(String(l||''))?String(l):'loja.html';
 const nrm=s=>String(s).normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();
 const api=async(u,b)=>{ // versão sem servidor: lê os dados de dados.js e produtos.js
   if(u==='/api/definicoes')return DAT;
@@ -21,10 +23,26 @@ addEventListener('error',e=>{if(e.target.tagName==='IMG')e.target.classList.add(
 let cart=[];try{cart=JSON.parse(localStorage.getItem('bm-carrinho'))||[]}catch(e){}
 const save=()=>{try{localStorage.setItem('bm-carrinho',JSON.stringify(cart))}catch(e){}badge()};
 const badge=()=>{const n=cart.reduce((a,i)=>a+i.q,0),b=$('#bdg');if(b){b.textContent=n;b.hidden=!n}};
+/* Ligação ao Supabase (ver js/config.js). Se faltar a configuração ou o Supabase não responder, a loja usa os ficheiros produtos.js / dados.js / pagamento.js. */
+const SB=window.SUPABASE||{},ON=!!(SB.url&&SB.key);let OFFLINE=!ON;
+const sbf=async(p,o={},ms=9000)=>{const c=new AbortController(),t=setTimeout(()=>c.abort(),ms);
+  try{const r=await fetch(SB.url.replace(/\/+$/,'')+'/rest/v1/'+p,{...o,signal:c.signal,headers:{apikey:SB.key,Authorization:'Bearer '+SB.key,'Content-Type':'application/json',...(o.headers||{})}});
+    const d=await r.json().catch(()=>null);if(!r.ok)throw new Error((d&&d.message)||'Erro '+r.status);return d}finally{clearTimeout(t)}};
+if(ON){try{
+  const [ps,df,pg]=await Promise.all([sbf('produtos?select=*,variantes(*)&publicado=eq.true&order=destaque.desc,id.desc'),sbf('definicoes?select=dados&id=eq.1'),sbf('rpc/pagamento_publico',{method:'POST',body:'{}'}).catch(()=>null)]);
+  if(!Array.isArray(ps)||!df||!df[0])throw new Error('Dados em falta');
+  DAT={...window.DADOS,...df[0].dados};
+  const ti=DAT.tamanhos||[],ci=DAT.cores||[],ix=(a,x)=>{const i=a.indexOf(x);return i<0?99:i};
+  PR=ps.map(p=>({...p,imagens:Array.isArray(p.imagens)?p.imagens:[],variantes:(p.variantes||[]).slice().sort((a,b)=>ix(ti,a.tamanho)-ix(ti,b.tamanho)||ix(ci,a.cor)-ix(ci,b.cor)||a.id-b.id),preco_final:p.preco_promo??p.preco}));
+  if(pg&&typeof pg==='object'){const P0=window.PAGAMENTO||(window.PAGAMENTO={metodos:{}});if('mostrarDados' in pg)P0.mostrarDados=pg.mostrarDados;if(pg.titular)P0.titular=pg.titular;
+    Object.entries(pg.valores||{}).forEach(([k,v])=>{if(P0.metodos&&P0.metodos[k]&&v)P0.metodos[k].valor=v})}
+}catch(x){OFFLINE=true}}
+let REL=null; // relações «Ver mais modelos»; se a tabela ainda não existir, a loja usa a mesma categoria
+if(ON&&!OFFLINE&&page==='produto'){try{const r=await sbf('produtos_relacionados?select=produto_id,relacionado_id,ordem&order=ordem.asc');if(Array.isArray(r))REL=r}catch(x){}}
 let D={zonas:[],taxa_entrega:0,tamanhos:[],cores:[],promocao:{}};try{D=await api('/api/definicoes')}catch(e){}
 const wa=t=>D.whatsapp_indicativo?`https://wa.me/${D.whatsapp_indicativo}${D.whatsapp}?text=${encodeURIComponent(t)}`:null; // só existe depois de confirmar o indicativo
 const svg=d=>`<svg viewBox="0 0 24 24" aria-hidden="true">${d}</svg>`,cur=page==='produto'?'loja':page;
-$('#hdr').outerHTML=`${D.promocao.ativa?`<div class="promo"><a href="${D.promocao.link||'loja.html'}"><strong>${D.promocao.titulo||''}</strong> ${D.promocao.texto||''}</a></div>`:''}<header class="hdr"><div class="c hin"><a class="logo" href="index.html" aria-label="B’M Custom - Início"><img src="${IMG}marca/logotipo.png" alt="B’M Custom" width="150" height="50"></a>
+$('#hdr').outerHTML=`${D.promocao.ativa?`<div class="promo"><a href="${esc(okLink(D.promocao.link))}"><strong>${esc(D.promocao.titulo)}</strong> ${esc(D.promocao.texto)}</a></div>`:''}<header class="hdr"><div class="c hin"><a class="logo" href="index.html" aria-label="B’M Custom - Início"><img src="${IMG}marca/logotipo.png" alt="B’M Custom" width="150" height="50"></a>
 <nav class="nav" id="nav" aria-label="Principal"><a href="index.html"${cur==='index'?' aria-current="page"':''}>Início</a><a href="loja.html"${cur==='loja'?' aria-current="page"':''}>Loja</a><a href="index.html#categorias">Categorias</a></nav>
 <button class="ib" id="st" type="button" aria-label="Pesquisar" aria-expanded="false" aria-controls="sf">${svg('<circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/>')}</button>
 <a class="ib" href="carrinho.html" aria-label="Carrinho">${svg('<path d="M6 7h13l-1.5 8H8z"/><path d="M6 7 5 3H2"/><circle cx="9" cy="20" r="1"/><circle cx="17" cy="20" r="1"/>')}<span class="bdg" id="bdg">0</span></a>
@@ -33,7 +51,7 @@ $('#hdr').outerHTML=`${D.promocao.ativa?`<div class="promo"><a href="${D.promoca
 const w=wa('Olá! Gostaria de falar com a B’M Custom.');
 $('#ftr').outerHTML=`<footer><div class="c"><div class="fg"><div><img src="${IMG}marca/logotipo.png" alt="B’M Custom"><p><strong>Veste a tua ideia.</strong></p></div>
 <div><h3>Loja</h3><ul><li><a href="loja.html">Todas as camisetas</a></li><li><a href="carrinho.html">Carrinho</a></li></ul></div>
-<div><h3>Entregas</h3><p class="mut">${D.zonas.join(' e ')||'Zonas por definir'} · ${kz(D.taxa_entrega||0)}${D.horario?' · '+D.horario:''}</p>${D.regras_mesmo_dia?`<p class="mut">${D.regras_mesmo_dia}</p>`:''}${w?`<p><a href="${w}" target="_blank" rel="noopener noreferrer"><strong>Falar no WhatsApp</strong></a></p>`:''}</div></div>
+<div><h3>Entregas</h3><p class="mut">${esc(D.zonas.join(' e ')||'Zonas por definir')} · ${kz(D.taxa_entrega||0)}${D.horario?' · '+esc(D.horario):''}</p>${D.regras_mesmo_dia?`<p class="mut">${esc(D.regras_mesmo_dia)}</p>`:''}${w?`<p><a href="${w}" target="_blank" rel="noopener noreferrer"><strong>Falar no WhatsApp</strong></a></p>`:''}</div></div>
 <p class="cp">© ${new Date().getFullYear()} B’M Custom. Todos os direitos reservados.</p></div></footer>`;
 badge();const nav=$('#nav'),bg=$('#bg'),sf=$('#sf'),st=$('#st');
 const setNav=o=>{nav.classList.toggle('open',o);bg.setAttribute('aria-expanded',o)},setSf=o=>{sf.classList.toggle('open',o);st.setAttribute('aria-expanded',o);if(o)$('#hq').focus()};
@@ -75,9 +93,12 @@ if(page==='produto'){
     const mk=(t,d,l)=>{const b=E('button',{type:'button',textContent:t,aria:l});b.onclick=()=>{const v=cv();q=Math.min(v?v.stock:1,Math.max(1,q+d));out.textContent=q};return b};
     add.onclick=()=>{const v=cv();if(!v||v.stock<1)return;const x=cart.find(i=>i.v===v.id);const n=Math.min(v.stock,(x?x.q:0)+q);x?x.q=n:cart.push({v:v.id,q:n});save();msg.className='msg ok';msg.textContent='Adicionado ao carrinho.';toast('Adicionado ao carrinho')};
     const w2=wa(`Olá! Tenho uma dúvida sobre "${p.nome}" (${location.href}).`);
+    const disp=x=>!(x.variantes.length&&!x.variantes.some(v=>v.stock>0)),cfg=(REL||[]).filter(r=>r.produto_id===p.id).sort((a,b)=>a.ordem-b.ordem);
+    const alt=(cfg.length?cfg.map(r=>PR.find(x=>x.id===r.relacionado_id)):PR.filter(x=>x.categoria===p.categoria)).filter(x=>x&&x.id!==p.id&&disp(x)).slice(0,12);
     paint();el.append(E('div',{},[pic,th]),E('div',{},[E('small',{className:'mut',textContent:CATS[p.categoria]}),E('h1',{textContent:p.nome}),E('p',{className:'pr',style:'font-size:1.4rem;margin:.5rem 0'},[p.preco_final?kz(p.preco_final):'Preço em breve',...(p.preco_promo!=null?[E('s',{textContent:kz(p.preco)})]:[])]),
       ...(p.descricao?[E('p',{className:'mut',textContent:p.descricao})]:[]),box,E('div',{className:'acts'},[E('div',{className:'qty'},[mk('−',-1,'Diminuir quantidade'),out,mk('+',1,'Aumentar quantidade')]),add]),msg,
-      E('p',{className:'mut',textContent:'Entrega em '+(D.zonas.join(' e ')||'zonas por definir')+' · '+kz(D.taxa_entrega||0)+'.'}),...(w2?[E('a',{className:'btn o',href:w2,target:'_blank',rel:'noopener noreferrer',textContent:'Dúvidas? WhatsApp'})]:[])]));}
+      E('p',{className:'mut',textContent:'Entrega em '+(D.zonas.join(' e ')||'zonas por definir')+' · '+kz(D.taxa_entrega||0)+'.'}),...(w2?[E('a',{className:'btn o',href:w2,target:'_blank',rel:'noopener noreferrer',textContent:'Dúvidas? WhatsApp'})]:[]),...(alt.length?[E('a',{className:'btn o',id:'vmm',href:'#mais-modelos',textContent:'Ver mais modelos'})]:[])]));
+    if(alt.length){const g=E('div',{className:'grid',id:'mm-grid'});alt.forEach(x=>g.append(card(x)));el.closest('main').append(E('section',{className:'sec alt',id:'mais-modelos',aria:'Mais modelos'},[E('div',{className:'c'},[E('h2',{textContent:'Mais modelos para ti'}),g])]))}}
 }
 const PAG=window.PAGAMENTO||{metodos:{}},MET=Object.entries(PAG.metodos||{}).map(([id,m])=>({id,...m}));
 const novoCodigo=()=>{const A='ABCDEFGHJKMNPQRSTUVWXYZ23456789';let r='';try{r=[...crypto.getRandomValues(new Uint8Array(6))].map(b=>A[b%A.length]).join('')}catch(x){for(let i=0;i<6;i++)r+=A[Math.floor(Math.random()*A.length)]}return'BM-'+r};
@@ -105,10 +126,20 @@ if(page==='carrinho'||page==='checkout'){
       if(!ls.length||ls.some(l=>!l.ok)){m.className='msg err';m.textContent='Reveja o carrinho: há produtos indisponíveis.';return}
       if(!/^\+?\d{9,15}$/.test(String(v.telefone).replace(/[\s-]/g,''))){m.className='msg err';m.textContent='Número de telefone inválido.';return}
       if(!Object.hasOwn(PAG.metodos||{},v.metodo||'')){m.className='msg err';m.textContent='Escolha um método de pagamento.';return}
-      const sub=ls.reduce((a,l)=>a+l.preco*l.q,0),cod=novoCodigo();
-      const enc={codigo:cod,metodo:v.metodo,itens:ls.map(l=>({nome:l.nome,tamanho:l.tamanho,cor:l.cor,q:l.q,preco:l.preco})),subtotal:sub,entrega:D.taxa_entrega,total:sub+D.taxa_entrega,nome:v.nome,telefone:v.telefone,zona:v.zona,endereco:v.endereco,obs:v.obs||'',criado:new Date().toISOString()};
-      try{localStorage.setItem('bm-enc-'+cod,JSON.stringify(enc))}catch(x){m.className='msg err';m.textContent='Não foi possível guardar a encomenda neste navegador. Desative o modo privado ou contacte-nos pelo WhatsApp.';return}
-      cart=[];save();location.href='confirmacao.html?c='+encodeURIComponent(cod)};
+      const bt=$('#go');bt.disabled=true;m.className='msg';m.textContent='A registar a encomenda...';
+      let enc;
+      if(OFFLINE){ // sem Supabase: comportamento anterior (código gerado no telemóvel, sem reserva de stock)
+        const sub=ls.reduce((a,l)=>a+l.preco*l.q,0),cod=novoCodigo();
+        enc={codigo:cod,metodo:v.metodo,itens:ls.map(l=>({nome:l.nome,tamanho:l.tamanho,cor:l.cor,q:l.q,preco:l.preco})),subtotal:sub,entrega:D.taxa_entrega,total:sub+D.taxa_entrega,nome:v.nome,telefone:v.telefone,zona:v.zona,endereco:v.endereco,obs:v.obs||'',criado:new Date().toISOString()};
+      }else{ // o preço, o stock e o código são decididos no servidor
+        try{const r=await sbf('rpc/criar_encomenda',{method:'POST',body:JSON.stringify({p:{nome:v.nome,telefone:v.telefone,zona:v.zona,endereco:v.endereco,obs:v.obs||'',metodo:v.metodo,itens:cart.map(i=>({v:i.v,q:i.q}))}})},15000);
+          enc={codigo:r.codigo,metodo:v.metodo,itens:r.itens,subtotal:r.subtotal,entrega:r.entrega,total:r.total,nome:v.nome,telefone:v.telefone,zona:v.zona,endereco:v.endereco,obs:v.obs||'',criado:new Date().toISOString()}}
+        catch(x){m.className='msg err';m.textContent=(x instanceof TypeError||x.name==='AbortError')?'Sem ligação. Verifique a internet e tente novamente.':(x.message||'Não foi possível registar a encomenda.');bt.disabled=false;draw();return}
+      }
+      try{localStorage.setItem('bm-enc-'+enc.codigo,JSON.stringify(enc))}catch(x){
+        if(!OFFLINE){cart=[];save();m.className='msg err';m.textContent='Encomenda '+enc.codigo+' registada, mas não foi possível mostrar os dados de pagamento neste navegador. Fale connosco pelo WhatsApp com este código.';return}
+        m.className='msg err';m.textContent='Não foi possível guardar a encomenda neste navegador. Desative o modo privado ou contacte-nos pelo WhatsApp.';bt.disabled=false;return}
+      cart=[];save();location.href='confirmacao.html?c='+encodeURIComponent(enc.codigo)};
   }
 }
 if(page==='confirmacao'){
